@@ -15,10 +15,17 @@ import {
 import { notFound } from "next/navigation";
 import { ACTIVITY_PER_PAGE } from "./constants";
 
-export const domain =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000"
-    : "http://localhost:3000";
+export const domain = (() => {
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:3000";
+  }
+
+  if (process.env.NEXTAUTH_URL) {
+    return process.env.NEXTAUTH_URL;
+  }
+
+  return "https://your-app.vercel.app";
+})();
 
 export const getWorkspace = async (workspace_id: string, userId: string) => {
   const res = await fetch(

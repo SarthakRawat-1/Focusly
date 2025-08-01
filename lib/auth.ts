@@ -97,10 +97,12 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async redirect({ url, baseUrl }) {
-      if (url.includes('/onboarding')) {
-        return `${baseUrl}/onboarding`;
+      const actualBaseUrl = process.env.NEXTAUTH_URL || baseUrl;
+
+      if (url.includes("/onboarding")) {
+        return `${actualBaseUrl}/onboarding`;
       }
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      return url.startsWith(actualBaseUrl) ? url : actualBaseUrl;
     },
     async session({ session, token }) {
       if (token) {
@@ -124,7 +126,6 @@ export const authOptions: NextAuthOptions = {
         session.user.completedOnboarding = user.completedOnboarding;
         session.user.username = user.username;
       }
-     
 
       return session;
     },

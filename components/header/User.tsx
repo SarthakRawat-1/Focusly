@@ -33,7 +33,7 @@ export const User = ({ profileImage, username, email }: Props) => {
 
   const logOutHandler = () => {
     signOut({
-      callbackUrl: `${window.location.origin}`,
+      callbackUrl: window.location.origin,
     });
   };
   return (
