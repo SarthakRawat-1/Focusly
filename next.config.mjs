@@ -4,6 +4,9 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    tsconfigPath: './tsconfig.json',
+  },
   images: {
     remotePatterns: [
       {
