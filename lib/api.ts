@@ -24,7 +24,7 @@ export const domain = (() => {
     return process.env.NEXTAUTH_URL;
   }
 
-  return "https://focusly-hzfx8viw6-sarthak-rawats-projects.vercel.app";
+  return "https://focusly-six.vercel.app/";
 })();
 
 export const getWorkspace = async (workspace_id: string, userId: string) => {

@@ -8,7 +8,7 @@ export function getOriginUrl(): string {
   }
 
   return process.env.NODE_ENV === "production"
-    ? "https://focusly-hzfx8viw6-sarthak-rawats-projects.vercel.app"
+    ? "https://focusly-six.vercel.app/"
     : "http://localhost:3000";
 }
 
