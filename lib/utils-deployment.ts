@@ -1,5 +1,5 @@
 export function getOriginUrl(): string {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     return window.location.origin;
   }
 
@@ -7,11 +7,10 @@ export function getOriginUrl(): string {
     return process.env.NEXTAUTH_URL;
   }
 
-  return process.env.NODE_ENV === 'production' 
-    ? 'https://your-app.vercel.app' 
-    : 'http://localhost:3000';
+  return process.env.NODE_ENV === "production"
+    ? "https://focusly-hzfx8viw6-sarthak-rawats-projects.vercel.app"
+    : "http://localhost:3000";
 }
-
 
 export function getApiBaseUrl(): string {
   return getOriginUrl();
