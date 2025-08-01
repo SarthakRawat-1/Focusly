@@ -1,3 +1,8 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -19,8 +24,16 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    esmExternals: false,
+  },
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
+    return config;
+  },
 };
 
-const withNextIntl = require("next-intl/plugin")("./i18n.ts");
-
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);
