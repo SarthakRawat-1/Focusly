@@ -1,11 +1,12 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import path from "path";
+import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin('./i18n.ts');
+const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    tsconfigPath: './tsconfig.json',
+    tsconfigPath: "./tsconfig.json",
   },
   images: {
     remotePatterns: [
@@ -35,6 +36,18 @@ const nextConfig = {
       ...config.resolve.fallback,
       fs: false,
     };
+
+    // ✅ Path aliases for Vercel/Webpack
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@": path.resolve(__dirname),
+      "@/components": path.resolve(__dirname, "components"),
+      "@/hooks": path.resolve(__dirname, "hooks"),
+      "@/lib": path.resolve(__dirname, "lib"),
+      "@/types": path.resolve(__dirname, "types"),
+      "@/app": path.resolve(__dirname, "app"),
+    };
+
     return config;
   },
 };
