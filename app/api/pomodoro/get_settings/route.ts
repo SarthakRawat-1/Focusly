@@ -15,8 +15,21 @@ export const GET = async (request: Request) => {
       },
     });
 
-    if (!pomodoroSettings)
-      return NextResponse.json("not found", { status: 200 });
+    if (!pomodoroSettings) {
+      // Create default pomodoro settings for new users
+      const defaultSettings = await db.pomodoroSettings.create({
+        data: {
+          userId: userId,
+          workDuration: 25,
+          shortBreakDuration: 5,
+          longBreakDuration: 15,
+          longBreakInterval: 4,
+          rounds: 4,
+          soundEffect: "BELL"
+        }
+      });
+      return NextResponse.json(defaultSettings, { status: 200 });
+    }
 
     return NextResponse.json(pomodoroSettings, { status: 200 });
   } catch (err) {

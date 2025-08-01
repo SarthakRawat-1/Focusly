@@ -24,7 +24,7 @@ export const domain = (() => {
     return process.env.NEXTAUTH_URL;
   }
 
-  return "https://your-app.vercel.app";
+  return "https://focusly-hzfx8viw6-sarthak-rawats-projects.vercel.app";
 })();
 
 export const getWorkspace = async (workspace_id: string, userId: string) => {
@@ -190,10 +190,15 @@ export const getUserPomodoroSettings = async (userId: string) => {
   );
 
   if (!res.ok) {
-    return notFound();
+    return null;
   }
 
-  return res.json() as Promise<PomodoroSettings>;
+  const data = await res.json();
+  if (data === "not found") {
+    return null;
+  }
+
+  return data as PomodoroSettings;
 };
 
 export const getInitialHomeRecentActivity = async (userId: string) => {

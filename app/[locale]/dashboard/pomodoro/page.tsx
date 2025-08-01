@@ -9,7 +9,10 @@ const Pomodoro = async () => {
   const session = await checkIfUserCompletedOnboarding(`/dashboard/pomodoro`);
 
   const pomodoroSettings = await getUserPomodoroSettings(session.user.id);
-  if (!pomodoroSettings) notFound();
+  if (!pomodoroSettings) {
+    // This shouldn't happen now since API creates default settings
+    notFound();
+  }
 
   return (
     <>
